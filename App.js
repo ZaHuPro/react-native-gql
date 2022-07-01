@@ -1,20 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from "react";
+import { ApolloProvider } from '@apollo/client';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import apolloClient from "./src/providers/apollo";
+import Home from "./src/screens/Home";
+
+class App extends Component {
+  state = {
+    client: apolloClient(),
+  };
+
+  render() {
+    return (
+      <ApolloProvider client={this.state.client}>
+        <Home />
+      </ApolloProvider>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
